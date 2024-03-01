@@ -8,7 +8,7 @@ spring:
     name: ead-notification-service
   config:
     import: 'optional:configserver:'
-  # configurações para base de dados
+  # configuraï¿½ï¿½es para base de dados
   datasource:
     url:  jdbc:postgresql://localhost:5432/ead-notification-v2
     username: postgres
@@ -25,10 +25,10 @@ spring:
   output:
     ansi:
       enabled: Always
-  # Conecta este serviço com a instância de rabbitmq criado em https://api.cloudamqp.com/console/1059565f-9ad0-4389-ad5b-74649522039a/details
+  # Conecta este serviï¿½o com a instï¿½ncia de rabbitmq criado em https://api.cloudamqp.com/console/1059565f-9ad0-4389-ad5b-74649522039a/details
   rabbitmq:
     addresses: amqps://nxohpdhb:swPoiBHgBXI2kNlhOpLm5Sm7OSKraWMN@shark.rmq.cloudamqp.com/nxohpdhb
-  # configuração para config server
+  # configuraï¿½ï¿½o para config server
   cloud:
     config:
       discovery:
@@ -41,6 +41,17 @@ logging:
     org.springframework.web: DEBUG
     org.hibernate: INFO
 
+#Define a Topic Exchange
+ead:
+  broker:
+    exchange:
+      notificationCommandExchange: ead.notificationcommand
+    queue:
+      notificationCommandQueue:
+        name: ead.notificationcommand.ms.notification
+    key:
+      notificationCommandKey: ms.notification
+
 management:
   endpoints:
     web:
@@ -49,7 +60,7 @@ management:
           - refresh
           - health
 
-# torna esta aplicação um cliente eureka
+# torna esta aplicaï¿½ï¿½o um cliente eureka
 eureka:
   client:
     serviceUrl:
