@@ -12,6 +12,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -29,7 +30,7 @@ public class NotificationConsumer {
             exchange = @Exchange(value = "${ead.broker.exchange.notificationCommandExchange}", type = ExchangeTypes.TOPIC, ignoreDeclarationExceptions = "true"),
             key = "${ead.broker.key.notificationCommandKey}")
     )
-    public void listen(@Payload NotificationCommandDto notificationCommandDto){
+    public void listen(@Payload @NotNull NotificationCommandDto notificationCommandDto){
         NotificationModel notificationModel = new NotificationModel();
         notificationModel.setUserId(notificationModel.getUserId());
         notificationModel.setTitle(notificationCommandDto.getTitle());
