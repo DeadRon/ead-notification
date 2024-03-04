@@ -32,9 +32,9 @@ public class NotificationConsumer {
     )
     public void listen(@Payload @NotNull NotificationCommandDto notificationCommandDto){
         NotificationModel notificationModel = new NotificationModel();
-        notificationModel.setUserId(notificationModel.getUserId());
+        notificationModel.setUserId(notificationCommandDto.getUserId());
         notificationModel.setTitle(notificationCommandDto.getTitle());
-        notificationModel.setMessage(notificationModel.getMessage());
+        notificationModel.setMessage(notificationCommandDto.getMessage());
         notificationModel.setCriationDate(LocalDateTime.now(ZoneId.of("UTC")));
         notificationModel.setNotificationStatus(NotificationStatus.CREATED);
         notificationService.saveNotification(notificationModel);

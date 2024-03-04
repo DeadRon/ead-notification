@@ -18,7 +18,7 @@ public class NotificationModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID noticationId;
+    private UUID notificationId;
     @Column(nullable = false)
     private UUID userId;
     @Column(nullable = false, length = 150)
@@ -32,11 +32,11 @@ public class NotificationModel implements Serializable {
     private NotificationStatus notificationStatus;
 
     public UUID getNoticationId() {
-        return noticationId;
+        return notificationId;
     }
 
     public void setNoticationId(UUID noticationId) {
-        this.noticationId = noticationId;
+        this.notificationId = noticationId;
     }
 
     public UUID getUserId() {
