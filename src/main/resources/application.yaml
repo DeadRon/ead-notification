@@ -7,7 +7,12 @@ spring:
   application:
     name: ead-notification-service
   config:
-    import: 'optional:configserver:'
+    import: 'configserver:'
+  cloud:
+    config:
+      discovery:
+        serviceId: ead-config-server
+
   # configura��es para base de dados
   datasource:
     url:  jdbc:postgresql://localhost:5432/ead-notification-v2
@@ -29,10 +34,6 @@ spring:
   rabbitmq:
     addresses: amqps://nxohpdhb:swPoiBHgBXI2kNlhOpLm5Sm7OSKraWMN@shark.rmq.cloudamqp.com/nxohpdhb
   # configura��o para config server
-  cloud:
-    config:
-      discovery:
-        serviceId: ead-config-server
 
 logging:
   level:
