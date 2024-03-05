@@ -1,7 +1,3 @@
-server:
-  port: 8084
-  servlet:
-    context-path: '/ead-notification/'
 
 spring:
   application:
@@ -12,59 +8,3 @@ spring:
     config:
       discovery:
         serviceId: ead-config-server
-
-  # configura��es para base de dados
-  datasource:
-    url:  jdbc:postgresql://localhost:5432/ead-notification-v2
-    username: postgres
-    password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-      jdbc:
-        lob.non-contextual-creation: true
-    properties:
-      hibernate:
-        show_sql: true
-  output:
-    ansi:
-      enabled: Always
-  # Conecta este servi�o com a inst�ncia de rabbitmq criado em https://api.cloudamqp.com/console/1059565f-9ad0-4389-ad5b-74649522039a/details
-  rabbitmq:
-    addresses: amqps://nxohpdhb:swPoiBHgBXI2kNlhOpLm5Sm7OSKraWMN@shark.rmq.cloudamqp.com/nxohpdhb
-  # configura��o para config server
-
-logging:
-  level:
-    com.ead: TRACE
-    root: INFO
-    org.springframework.web: DEBUG
-    org.hibernate: INFO
-
-#Define a Topic Exchange
-ead:
-  broker:
-    exchange:
-      notificationCommandExchange: ead.notificationcommand
-    queue:
-      notificationCommandQueue:
-        name: ead.notificationcommand.ms.notification
-    key:
-      notificationCommandKey: ms.notification
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-          - refresh
-          - health
-
-# torna esta aplica��o um cliente eureka
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: 'http://localhost:8761/eureka'
-  instance:
-    hostname: localhost
