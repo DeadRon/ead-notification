@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,7 +33,8 @@ public class UserNotificationController {
     @GetMapping("/users/{userId}/notifications")
     public ResponseEntity<Page<NotificationModel>> getAllNotificationsByUser(
             @PathVariable(value = "userId") UUID userId,
-            @PageableDefault(page = 0, size = 10 ,sort = "notificationId", direction = Sort.Direction.ASC) Pageable pageable
+            @PageableDefault(page = 0, size = 10 ,sort = "notificationId", direction = Sort.Direction.ASC) Pageable pageable,
+            Authentication authentication
     ){
         return status(OK).body(notificationService.findAllNotificationsByUser(userId, pageable));
 
